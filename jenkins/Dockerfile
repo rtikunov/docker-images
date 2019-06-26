@@ -1,4 +1,4 @@
-FROM docker.io/jenkins
+FROM jenkins/jenkins:lts
 
 # Set the locale
 ENV LANG en_US.UTF-8  
@@ -12,7 +12,7 @@ COPY ./locale.gen /etc/
 USER root
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && \
-    apt-get -y install python3 python3-pip gettext locales wget && \
+    apt-get -y install python3 python3-pip gettext locales wget vim sudo && \
     apt-get clean all
 
 RUN locale-gen
@@ -23,5 +23,10 @@ RUN wget https://github.com/openshift/origin/releases/download/v3.6.1/openshift-
     tar zxvf /tmp/openshift-origin-client-tools.tar.gz -C /tmp/ && \
     cp /tmp/openshift-origin-client-tools-v3.6.1-008f2d5-linux-64bit/oc /usr/bin/ && \
     rm -rf /tmp/openshift-origin-client-tools-v3.6.1-008f2d5-linux-64bit /tmp/openshift-origin-client-tools.tar.gz
+
+RUN wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz -O /tmp/openshift-origin-client-tools.tar.gz && \
+    tar zxvf /tmp/openshift-origin-client-tools.tar.gz -C /tmp/ && \
+    cp /tmp/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit/oc /usr/bin/oc311 && \
+    rm -rf /tmp/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit /tmp/openshift-origin-client-tools.tar.gz
 
 USER jenkins
