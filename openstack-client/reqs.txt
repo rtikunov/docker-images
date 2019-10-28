@@ -1,0 +1,6 @@
+pip
+influxdb
+requests
+termcolor
+python-openstackclient
+python-manilaclient

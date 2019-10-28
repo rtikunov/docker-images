@@ -1,0 +1,6 @@
+alias ka="kubectl apply -f "
+alias kg="kubectl get "
+alias kd="kubectl describe "
+alias kgp="kubectl get pod "
+alias kgs="kubectl get service "
+alias kgd="kubectl get deploy "
