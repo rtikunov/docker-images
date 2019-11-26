@@ -1,0 +1,4 @@
+pip
+influxdb
+requests
+termcolor
